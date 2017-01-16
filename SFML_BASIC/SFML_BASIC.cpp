@@ -47,8 +47,7 @@ int main()
     glClearColor(0.3f, 0.3f, 0.3f, 0.f); //background colour
     glEnable(GL_DEPTH_TEST); 
     glDepthMask(GL_TRUE); 
-	glEnable(GL_CULL_FACE);
-    
+	
  
 
 
@@ -92,12 +91,12 @@ int main()
 		//glLoadIdentity();
 
 		//calculate new prespective and aspect ratio
-		//gluPerspective(30.0f,(GLfloat)width/(GLfloat)height,1.0f,1000.0f);
+		gluPerspective(60.0f,(GLfloat)width/(GLfloat)height,1.f,1000.0f);
 
         glMatrixMode(GL_MODELVIEW); 
         glLoadIdentity(); 
          
-		//glTranslatef(0,0,-60); //push back 10 units from camera
+		glTranslatef(0,0,-2); //push back 10 units from camera
 		//gluLookAt(	0,0,100,// camera position
 		//			0,0,0, //look at this point
 		//			0,1,0); //camera up
@@ -108,9 +107,15 @@ int main()
 		
 
 		ang+=0.01f;
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+		glEnable(GL_CULL_FACE);
 
 		Draw_Cuboid(1,1,1);
+		glDisable(GL_CULL_FACE);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		Draw_Cuboid(1, 1, 1);
 
 		glTranslatef(0,40,0);//move everyting after this line by 40 units along y-axis
 		glRotatef(ang*5,0,0,1); //spin about z-axis
@@ -154,31 +159,32 @@ void Draw_Cuboid(float width,float height,float depth){
 		//glNormal3fv(normal);
 		glColor3d(1.0,0.0,1.0);
 		glVertex3fv(points[0]); glVertex3fv(points[3]); glVertex3fv(points[7]); glVertex3fv(points[4]);
-
+		
 		//back
 		//NormalVector(points[1],points[5],points[6],normal);
 		//glNormal3fv(normal);
 		glColor3d(1.0,1.0,0.0);
 		glVertex3fv(points[1]); glVertex3fv(points[5]); glVertex3fv(points[6]); glVertex3fv(points[2]);
-
+		
 		//left
 		//NormalVector(points[3],points[2],points[6],normal);
 		//glNormal3fv(normal);
 		glColor3d(0.0,1.0,0.0);
-		glVertex3fv(points[3]); glVertex3fv(points[2]); glVertex3fv(points[6]); glVertex3fv(points[7]);
-
+		glVertex3fv(points[6]); glVertex3fv(points[7]); glVertex3fv(points[3]); glVertex3fv(points[2]);
+		
 		//right
 		//NormalVector(points[1],points[0],points[4],normal);
 		//glNormal3fv(normal);
 		glColor3d(0.0,0.0,1.0);
-		glVertex3fv(points[1]); glVertex3fv(points[0]); glVertex3fv(points[4]); glVertex3fv(points[5]);
+		glVertex3fv(points[4]); glVertex3fv(points[5]); glVertex3fv(points[1]); glVertex3fv(points[0]);
 
 		//bottom
 		//NormalVector(points[4],points[7],points[6],normal);
 		//glNormal3fv(normal);
 		glColor3d(1.0,0.0,0.0);
 		glVertex3fv(points[4]); glVertex3fv(points[7]); glVertex3fv(points[6]); glVertex3fv(points[5]);
-
+		
+		
 	glEnd();
 	glPopMatrix();
 }
