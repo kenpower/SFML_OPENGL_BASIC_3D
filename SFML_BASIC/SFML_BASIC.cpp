@@ -47,24 +47,10 @@ int main()
     glClearColor(0.3f, 0.3f, 0.3f, 0.f); //background colour
     glEnable(GL_DEPTH_TEST); 
     glDepthMask(GL_TRUE); 
-   
+	glEnable(GL_CULL_FACE);
     
  
-    //set up a  orthographic projection same size as window
-    //this means the vertex coordinates are in pixel space
-    //glOrtho(0,800,0,600,0,100); // use pixel coordinates
-    
-	
-	
-   
-	//glMatrixMode(GL_PROJECTION); // reset projection matrix
-	//glLoadIdentity();
 
-	//calculate new prespective and aspect ratio
-	//gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,1.0f,1000.0f);
-
-	glMatrixMode(GL_MODELVIEW); // reset modelview matrix
-	glLoadIdentity();
 
 
     // Start game loop 
@@ -93,11 +79,11 @@ int main()
 		glLoadIdentity();
 
 		//set up a 3D Perspective View volume
-		//gluPerspective(90.f, 1.f, 1.f, 300.0f);//fov, aspect, zNear, zFar 
+		//gluPerspective(90.f, (float)width/height, 1.f, 300.0f);//fov, aspect, zNear, zFar 
         // Apply some transformations 
 		//set up a  orthographic projection same size as window
 		//this means the vertex coordinates are in pixel space
-		//glOrtho(0,800,0,600,0,100); // use pixel coordinates
+		//glOrtho(-2,2,-2,2,0,10); // use pixel coordinates
 
 
 
@@ -106,15 +92,15 @@ int main()
 		//glLoadIdentity();
 
 		//calculate new prespective and aspect ratio
-		//gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,1.0f,1000.0f);
+		//gluPerspective(30.0f,(GLfloat)width/(GLfloat)height,1.0f,1000.0f);
 
         glMatrixMode(GL_MODELVIEW); 
         glLoadIdentity(); 
          
-		//glTranslatef(0,0,-10); //pish back 10 units from camera
+		//glTranslatef(0,0,-60); //push back 10 units from camera
 		//gluLookAt(	0,0,100,// camera position
 		//			0,0,0, //look at this point
-		//			0,1,1); //camera up
+		//			0,1,0); //camera up
 
 		static float ang=0.0;
 		glRotatef(ang,1,0,0); //spin about x-axis
